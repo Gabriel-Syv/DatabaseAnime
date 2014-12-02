@@ -1,6 +1,9 @@
 #include "settings.h"
 #include "ui_settings.h"
 
+#include <QColorDialog>
+#include <QStyleFactory>
+
 Settings::Settings(MngrConnection &MngrCon, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Settings), MngrConnect(MngrCon)
@@ -828,4 +831,175 @@ void Settings::on_actionShowExportProgressBar_triggered(bool checked)
 {
     ui->PBtn_Action_Export->setVisible(!checked);
     ui->ProgressBar_Export->setVisible(checked);
+}
+
+void setBackgroundColor(QWidget* wgt, QColor clr){
+    wgt->setStyleSheet( "background-color: rgb("
+                                     + QString::number( clr.red() ) + ","
+                                     + QString::number( clr.green() ) + ", "
+                                     + QString::number( clr.blue() ) + ");"
+                                    );
+}
+
+void Settings::on_toolButton_Window_clicked()
+{
+    QColorDialog *dlg = new QColorDialog(ui->frame_Window->palette().background().color(), this);
+    dlg->setModal(true);
+    dlg->exec();
+
+    setBackgroundColor(ui->frame_Window, dlg->selectedColor());
+    stylePalette.setColor(QPalette::Window, dlg->selectedColor());
+
+    dlg->deleteLater();
+}
+
+void Settings::on_toolButton_TextLabel_clicked()
+{
+    QColorDialog *dlg = new QColorDialog(ui->frame_WindowText->palette().background().color(), this);
+    dlg->setModal(true);
+    dlg->exec();
+
+    setBackgroundColor(ui->frame_WindowText, dlg->selectedColor());
+    stylePalette.setColor(QPalette::WindowText, dlg->selectedColor());
+
+    dlg->deleteLater();
+}
+
+void Settings::on_toolButton_Base_clicked()
+{
+    QColorDialog *dlg = new QColorDialog(ui->frame_Base->palette().background().color(), this);
+    dlg->setModal(true);
+    dlg->exec();
+
+    setBackgroundColor(ui->frame_Base, dlg->selectedColor());
+    stylePalette.setColor(QPalette::Base, dlg->selectedColor());
+
+    dlg->deleteLater();
+}
+
+void Settings::on_toolButton_AlternateBase_clicked()
+{
+    QColorDialog *dlg = new QColorDialog(ui->frame_AlternateBase->palette().background().color(), this);
+    dlg->setModal(true);
+    dlg->exec();
+
+    setBackgroundColor(ui->frame_AlternateBase, dlg->selectedColor());
+    stylePalette.setColor(QPalette::AlternateBase, dlg->selectedColor());
+
+    dlg->deleteLater();
+}
+
+void Settings::on_toolButton_ToolTipBase_clicked()
+{
+    QColorDialog *dlg = new QColorDialog(ui->frame_ToolTipBase->palette().background().color(), this);
+    dlg->setModal(true);
+    dlg->exec();
+
+    setBackgroundColor(ui->frame_ToolTipBase, dlg->selectedColor());
+    stylePalette.setColor(QPalette::ToolTipBase, dlg->selectedColor());
+
+    dlg->deleteLater();
+}
+
+void Settings::on_toolButton_ToolTipText_clicked()
+{
+    QColorDialog *dlg = new QColorDialog(ui->frame_ToolTipText->palette().background().color(), this);
+    dlg->setModal(true);
+    dlg->exec();
+
+    setBackgroundColor(ui->frame_ToolTipText, dlg->selectedColor());
+    stylePalette.setColor(QPalette::ToolTipText, dlg->selectedColor());
+
+    dlg->deleteLater();
+}
+
+void Settings::on_toolButton_Text_clicked()
+{
+    QColorDialog *dlg = new QColorDialog(ui->frame_Text->palette().background().color(), this);
+    dlg->setModal(true);
+    dlg->exec();
+
+    setBackgroundColor(ui->frame_Text, dlg->selectedColor());
+    stylePalette.setColor(QPalette::Text, dlg->selectedColor());
+
+    dlg->deleteLater();
+}
+
+void Settings::on_toolButton_Button_clicked()
+{
+    QColorDialog *dlg = new QColorDialog(ui->frame_Button->palette().background().color(), this);
+    dlg->setModal(true);
+    dlg->exec();
+
+    setBackgroundColor(ui->frame_Button, dlg->selectedColor());
+    stylePalette.setColor(QPalette::Button, dlg->selectedColor());
+
+    dlg->deleteLater();
+}
+
+void Settings::on_toolButton_ButtonText_clicked()
+{
+    QColorDialog *dlg = new QColorDialog(ui->frame_ButtonText->palette().background().color(), this);
+    dlg->setModal(true);
+    dlg->exec();
+
+    setBackgroundColor(ui->frame_ButtonText, dlg->selectedColor());
+    stylePalette.setColor(QPalette::ButtonText, dlg->selectedColor());
+
+    dlg->deleteLater();
+}
+
+void Settings::on_toolButton_BrightText_clicked()
+{
+    QColorDialog *dlg = new QColorDialog(ui->frame_BrightText->palette().background().color(), this);
+    dlg->setModal(true);
+    dlg->exec();
+
+    setBackgroundColor(ui->frame_BrightText, dlg->selectedColor());
+    stylePalette.setColor(QPalette::BrightText, dlg->selectedColor());
+
+    dlg->deleteLater();
+}
+
+void Settings::on_toolButton_Link_clicked()
+{
+    QColorDialog *dlg = new QColorDialog(ui->frame_Link->palette().background().color(), this);
+    dlg->setModal(true);
+    dlg->exec();
+
+    setBackgroundColor(ui->frame_Link, dlg->selectedColor());
+    stylePalette.setColor(QPalette::Link, dlg->selectedColor());
+
+    dlg->deleteLater();
+}
+
+void Settings::on_toolButton_Highlight_clicked()
+{
+    QColorDialog *dlg = new QColorDialog(ui->frame_Highlight->palette().background().color(), this);
+    dlg->setModal(true);
+    dlg->exec();
+
+    setBackgroundColor(ui->frame_Highlight, dlg->selectedColor());
+    stylePalette.setColor(QPalette::Highlight, dlg->selectedColor());
+
+    dlg->deleteLater();
+}
+
+void Settings::on_toolButton_HighlightedText_clicked()
+{
+    QColorDialog *dlg = new QColorDialog(ui->frame_HighlightedText->palette().background().color(), this);
+    dlg->setModal(true);
+    dlg->exec();
+
+    setBackgroundColor(ui->frame_HighlightedText, dlg->selectedColor());
+    stylePalette.setColor(QPalette::HighlightedText, dlg->selectedColor());
+
+    dlg->deleteLater();
+}
+
+void Settings::on_pushButton_clicked()
+{
+    qApp->setStyle( QStyleFactory::create("Fusion") );
+    qApp->setPalette( stylePalette );
+    qApp->setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
 }
