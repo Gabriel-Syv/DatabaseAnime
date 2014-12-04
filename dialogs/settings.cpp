@@ -4,6 +4,14 @@
 #include <QColorDialog>
 #include <QStyleFactory>
 
+void setBackgroundColor(QWidget* wgt, QColor clr){
+    wgt->setStyleSheet( "background-color: rgb("
+                                     + QString::number( clr.red() ) + ","
+                                     + QString::number( clr.green() ) + ", "
+                                     + QString::number( clr.blue() ) + ");"
+                                    );
+}
+
 Settings::Settings(MngrConnection &MngrCon, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Settings), MngrConnect(MngrCon)
@@ -98,6 +106,21 @@ Settings::Settings(MngrConnection &MngrCon, QWidget *parent) :
         else
             ui->ComboBox_ItemList_DisplayedField->setCurrentIndex( 1 );
     }
+
+    // Style
+    stylePalette = qApp->palette();
+    setBackgroundColor(ui->frame_Window,          stylePalette.color(QPalette::Window) );
+    setBackgroundColor(ui->frame_WindowText,      stylePalette.color(QPalette::WindowText) );
+    setBackgroundColor(ui->frame_Base,            stylePalette.color(QPalette::Base) );
+    setBackgroundColor(ui->frame_AlternateBase,   stylePalette.color(QPalette::AlternateBase) );
+    setBackgroundColor(ui->frame_ToolTipBase,     stylePalette.color(QPalette::ToolTipBase) );
+    setBackgroundColor(ui->frame_ToolTipText,     stylePalette.color(QPalette::ToolTipText) );
+    setBackgroundColor(ui->frame_Text,            stylePalette.color(QPalette::Button) );
+    setBackgroundColor(ui->frame_ButtonText,      stylePalette.color(QPalette::BrightText) );
+    setBackgroundColor(ui->frame_Link,            stylePalette.color(QPalette::Link) );
+    setBackgroundColor(ui->frame_Highlight,       stylePalette.color(QPalette::Highlight) );
+    setBackgroundColor(ui->frame_HighlightedText, stylePalette.color(QPalette::HighlightedText) );
+
 }
 
 Settings::~Settings()
@@ -831,14 +854,6 @@ void Settings::on_actionShowExportProgressBar_triggered(bool checked)
 {
     ui->PBtn_Action_Export->setVisible(!checked);
     ui->ProgressBar_Export->setVisible(checked);
-}
-
-void setBackgroundColor(QWidget* wgt, QColor clr){
-    wgt->setStyleSheet( "background-color: rgb("
-                                     + QString::number( clr.red() ) + ","
-                                     + QString::number( clr.green() ) + ", "
-                                     + QString::number( clr.blue() ) + ");"
-                                    );
 }
 
 void Settings::on_toolButton_Window_clicked()

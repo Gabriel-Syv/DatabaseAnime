@@ -8,14 +8,17 @@
 
 #include <QPushButton>
 
-//void LookProgressBar::wheelEvent(QWheelEvent *pe)
-//{
-//    if( pe->delta() > 0 ){
-//        progressInc();
-//    }else{
-//        progressDec();
-//    }
-//}
+void LookProgressBar::wheelEvent(QWheelEvent *e)
+{
+    int value = getValue();
+    if( e->delta() > 0 ){
+        emit progressChanged( value + 1 );
+        emit progressChanged( value + 1, getTargetField() );
+    }else{
+        emit progressChanged( value - 1 );
+        emit progressChanged( value - 1, getTargetField() );
+    }
+}
 
 void LookProgressBar::initCreate()
 {
@@ -23,6 +26,10 @@ void LookProgressBar::initCreate()
     _btnSub = new QToolButton(this);
     _lookProgressBar = new QProgressBar(this);
     _hLay = new QHBoxLayout(this);
+
+    _btnAdd->setMinimumSize(32,32);
+    _btnSub->setMinimumSize(32,32);
+    _lookProgressBar->setMinimumHeight(32);
 
     this->setLayout(_hLay);
     _hLay->addWidget(_btnSub);

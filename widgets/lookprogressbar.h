@@ -25,6 +25,7 @@ private:
     bool revertWhenOverflow;
     QString _targetFieldDB;
 
+    void wheelEvent(QWheelEvent *e);
     void initCreate();  // First!
     void initConnect(); // Second!
 public:

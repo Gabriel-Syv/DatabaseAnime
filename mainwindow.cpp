@@ -129,6 +129,10 @@ void MainWindow::replyVersionVerificationFinished(QNetworkReply* r){
 }
 
 void MainWindow::closeEvent(QCloseEvent *e){
+    // #ToDo : Test it
+    /* [Experemental] */
+    mngrConnection.commit();
+    /* [/Experemental] */
     mngrConnection.close();
 
     DbaSettings settings;
@@ -305,6 +309,11 @@ void MainWindow::on_TButton_Delete_clicked()
 
 void MainWindow::on_TreeView_List_activated(const QModelIndex&)
 {
+    // #ToDo : Test it
+    /* [Experemental] */
+    mngrConnection.commit();
+    mngrConnection.transaction();
+    /* [/Experemental] */
     _currentItemId = ui->TreeView_List->selectionModel()->selectedIndexes().at(0).data().toULongLong();
     ui->stackedWidget->setCurrentIndex(1);
     switch( getActiveTable() ){
