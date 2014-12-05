@@ -49,7 +49,6 @@ public:
 signals:
     void progressChanged(int, QString);
     void progressOverflow();
-    void progressChanged(int); // Technical
 };
 
 #endif // LOOKPROGRESSBAR_H
